@@ -6,7 +6,7 @@ const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-        login(action) {
+        login(state,action) {
             return action.payload;
         },
         logout() {
