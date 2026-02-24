@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login, setData } from '../app/appSlice';
+import { login } from '../app/appSlice';
 import { useNavigate } from 'react-router-dom';
-import { User, Lock, Loader2 } from 'lucide-react';
+import { User, Eye, EyeOff, Lock, Loader2 } from 'lucide-react';
+
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [showHidePassword, setShowHidePassword] = useState(false)
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -30,9 +32,8 @@ export default function LoginPage() {
 
             const data = await res.json();
 
-            dispatch(setData(data.TABLE_DATA.data));
-            dispatch(login());
-            localStorage.setItem("isLoggedin", "true");
+            dispatch(login(data.TABLE_DATA.data));
+            localStorage.setItem("data", JSON.stringify(data.TABLE_DATA.data));
 
             navigate("/list");
 
@@ -68,7 +69,7 @@ export default function LoginPage() {
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-                                placeholder="testuser"
+                                placeholder="Enter Username"
                             />
                         </div>
                     </div>
@@ -80,13 +81,21 @@ export default function LoginPage() {
                                 <Lock size={18} />
                             </span>
                             <input
-                                type="password"
+                                type={showHidePassword ? "text" : "password"}
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                                 placeholder="••••••••"
                             />
+                            {!showHidePassword ?
+                                <span onClick={() => setShowHidePassword(prev => !prev)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400">
+                                    <Eye size={18} />
+                                </span> :
+                                <span onClick={() => setShowHidePassword(prev => !prev)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400">
+                                    <EyeOff size={18} />
+                                </span>
+                            }
                         </div>
                     </div>
 
