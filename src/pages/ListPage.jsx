@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MapPin, Briefcase, LogOut, ChevronRight, BarChart3, Map as MapIcon } from 'lucide-react';
@@ -10,8 +9,6 @@ export default function ListPage() {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        console.log("Clicked");
-
         dispatch(logout());
         localStorage.removeItem("data");
     };

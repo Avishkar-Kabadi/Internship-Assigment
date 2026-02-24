@@ -6,8 +6,7 @@ const appSlice = createSlice({
     name: "app",
     initialState,
     reducers: {
-
-        login(state, action) {
+        login(action) {
             return action.payload;
         },
         logout() {
@@ -15,7 +14,6 @@ const appSlice = createSlice({
         },
     }
 });
-
 
 export const { login, logout } = appSlice.actions;
 export default appSlice.reducer;

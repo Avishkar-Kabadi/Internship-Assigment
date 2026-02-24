@@ -39,7 +39,6 @@ export default function LoginPage() {
 
         } catch (err) {
             setError(err.ErrorDescription || "API Connection Failed");
-            console.error(err);
         } finally {
             setIsLoading(false);
             setUsername("");

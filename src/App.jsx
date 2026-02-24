@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate, Outlet } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -16,11 +16,13 @@ export default function App() {
 
   return (
     <Routes>
+      {/* public route */}
       <Route
         path="/login"
         element={!isLoggedIn ? <LoginPage /> : <Navigate to="/" replace />}
       />
 
+      {/* protected routes */}
       <Route path="/" element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
         <Route index element={<ListPage />} />
         <Route path="details/:id" element={<DetailsPage />} />
