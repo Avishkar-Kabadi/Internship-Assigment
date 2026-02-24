@@ -1,5 +1,5 @@
 
-import { Route, Routes, Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = ({ isLoggedIn }) => {
     if (!isLoggedIn) {
